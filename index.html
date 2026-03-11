@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bon Sitaula</title>
+  <meta name="description" content="Software engineer. Writing about code, systems, and things I'm building." />
+  <style>
+    :root[data-theme="dark"] {
+      --bg: #282828;
+      --bg-subtle: #32302f;
+      --border: #3c3836;
+      --text: #ebdbb2;
+      --text-muted: #a89984;
+      --text-faint: #504945;
+      --accent: #fabd2f;
+      --accent-hover: #d79921;
+      --tag-bg: #3c3836;
+      --tag-text: #928374;
+      --toggle-bg: #3c3836;
+      --toggle-icon: "☀️";
+      --card-bg: #32302f;
+      --card-border: #3c3836;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #fbf1c7;
+      --bg-subtle: #f2e5bc;
+      --border: #ebdbb2;
+      --text: #3c3836;
+      --text-muted: #7c6f64;
+      --text-faint: #d5c4a1;
+      --accent: #b57614;
+      --accent-hover: #af3a03;
+      --tag-bg: #ebdbb2;
+      --tag-text: #7c6f64;
+      --toggle-bg: #ebdbb2;
+      --toggle-icon: "🌙";
+      --card-bg: #f9f5d7;
+      --card-border: #d5c4a1;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      transition: background 0.25s, color 0.25s;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav-logo {
+      font-size: 14px;
+      font-weight: 600;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      color: var(--accent);
+      letter-spacing: 0;
+      cursor: default;
+      user-select: none;
+    }
+
+    .nav-logo .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: middle;
+      border-radius: 1px;
+      animation: blink 1.1s step-start infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      background: var(--toggle-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, border-color 0.2s;
+      line-height: 1;
+    }
+
+    .theme-toggle:hover { color: var(--text); }
+
+    .theme-toggle .toggle-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .theme-toggle .toggle-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 80px 0 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5.5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      white-space: nowrap;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero-bio {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-bio strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .social-link:hover {
+      color: var(--text);
+      border-color: var(--text-muted);
+    }
+
+    .social-link svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      fill: currentColor;
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .section-header a {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .section-header a:hover { color: var(--accent-hover); }
+
+    /* ── Blog Posts ── */
+    .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .post-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .post-item:last-child { border-bottom: none; }
+
+    .post-item:hover .post-title { color: var(--accent); }
+
+    .post-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      color: var(--text);
+      transition: color 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .post-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .post-read-time {
+      font-size: 12px;
+      color: var(--text-faint);
+      white-space: nowrap;
+    }
+
+    /* ── Projects ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 540px) {
+      .project-grid { grid-template-columns: 1fr; }
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .project-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .project-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .project-link-icon {
+      color: var(--text-faint);
+      transition: color 0.15s;
+    }
+
+    .project-card:hover .project-link-icon { color: var(--accent); }
+
+    .project-link-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .project-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .stack-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      border-radius: 4px;
+      padding: 2px 7px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 40px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .nav-links .hide-mobile { display: none; }
+      .post-item { flex-direction: column; gap: 6px; }
+      .post-read-time { display: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="inner">
+      <span class="nav-logo">cd ~<span class="cursor"></span></span>
+      <div class="nav-links">
+        <a href="#posts" class="hide-mobile">Blog</a>
+        <a href="#projects" class="hide-mobile">Projects</a>
+        <a href="quotes/index.html" class="hide-mobile">Quotes</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="toggle-icon" id="toggleIcon">☀️</span>
+          <span class="toggle-label" id="toggleLabel">Light</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <h1>Bon Sitaula</h1>
+      <p class="hero-bio">
+        Exploring human experiences through building and music.
+      </p>
+      <div class="social-links">
+        <a href="https://github.com/CuriousCilantro" class="social-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.5.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.2.9 2.3v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </header>
+
+    <!-- Blog Posts -->
+    <section id="posts">
+      <div class="section-header">
+        <h2>Recent Posts</h2>
+        <a href="blog/index.html">All posts →</a>
+      </div>
+      <div class="post-list" id="posts-list">
+        <p style="color:var(--text-muted);font-size:14px;padding:18px 0">Loading…</p>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-header">
+        <h2>Projects</h2>
+        <a href="https://github.com/CuriousCilantro" target="_blank" rel="noopener">GitHub →</a>
+      </div>
+      <div class="project-grid">
+
+        <a href="https://github.com/CuriousCilantro/kickstarter" class="project-card" target="_blank" rel="noopener">
+          <div class="project-card-top">
+            <span class="project-icon">📊</span>
+            <span class="project-link-icon">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            </span>
+          </div>
+          <div class="project-name">Kickstarter Analysis</div>
+          <div class="project-desc">Data analysis of Kickstarter campaigns, exploring backer behavior and campaign duration patterns.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Data Analysis</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/CuriousCilantro/Nasa-Image-Search" class="project-card" target="_blank" rel="noopener">
+          <div class="project-card-top">
+            <span class="project-icon">🚀</span>
+            <span class="project-link-icon">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            </span>
+          </div>
+          <div class="project-name">NASA Image Search</div>
+          <div class="project-desc">A web app for searching and browsing NASA's public image library.</div>
+          <div class="project-stack">
+            <span class="stack-tag">Django</span>
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">HTML</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 Bon Sitaula</span>
+        <div class="footer-links">
+          <a href="https://github.com/CuriousCilantro" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('toggleIcon');
+    const label = document.getElementById('toggleLabel');
+    const html = document.documentElement;
+
+    // Persist preference
+    const saved = localStorage.getItem('theme');
+    if (saved) applyTheme(saved);
+
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('theme', next);
+    });
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+    }
+
+    // ── Load posts from manifest ───────────────────────────
+    fetch('blog/manifest.json')
+      .then(r => r.json())
+      .then(posts => {
+        const list = document.getElementById('posts-list');
+        list.innerHTML = posts.slice(0, 3).map(p => `
+          <a href="blog/post.html?slug=${p.slug}" class="post-item">
+            <div class="post-left">
+              <span class="post-title">${p.title}</span>
+              <div class="post-tags">
+                ${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+              </div>
+            </div>
+            <div class="post-meta">
+              <span class="post-read-time">${p.readTime}</span>
+              <span class="post-date">${p.date}</span>
+            </div>
+          </a>`).join('');
+      })
+      .catch(() => {
+        document.getElementById('posts-list').innerHTML =
+          '<p style="color:var(--text-muted);font-size:14px;padding:18px 0">Could not load posts. Run via a local server to preview.</p>';
+      });
+  </script>
+
+</body>
+</html>

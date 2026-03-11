@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quotes — Bon Sitaula</title>
+  <link rel="stylesheet" href="../blog/shared.css" />
+  <style>
+    .page-header {
+      padding: 60px 0 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+    .page-header p {
+      margin-top: 12px;
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+
+    .quotes-list {
+      padding: 8px 0 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .quote-item {
+      margin: 0;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quote-item:last-child { border-bottom: none; }
+
+    .quote-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      font-style: italic;
+      margin: 0 0 12px 0;
+    }
+
+    .quote-author {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+      font-style: normal;
+    }
+
+    .quote-context {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <span class="nav-logo">cd ~<span class="cursor"></span></span>
+      <div class="nav-links">
+        <a href="../index.html" class="back-link hide-mobile">← Home</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="toggle-icon" id="toggleIcon">☀️</span>
+          <span class="toggle-label" id="toggleLabel">Light</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header class="page-header">
+      <p class="page-eyebrow">Collected</p>
+      <h1>Quotes</h1>
+      <p>Words that stuck.</p>
+    </header>
+
+    <div class="quotes-list">
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"The purpose of art is washing the dust of daily life off our souls."</p>
+        <cite class="quote-author">Pablo Picasso</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Programs must be written for people to read, and only incidentally for machines to execute."</p>
+        <cite class="quote-author">Harold Abelson</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Music gives a soul to the universe, wings to the mind, flight to the imagination, and life to everything."</p>
+        <cite class="quote-author">Plato</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"The most important property of a program is whether it accomplishes the intention of its user."</p>
+        <cite class="quote-author">C.A.R. Hoare</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Music is the shorthand of emotion."</p>
+        <cite class="quote-author">Leo Tolstoy</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"It is not a daily increase, but a daily decrease. Hack away at the unessential."</p>
+        <cite class="quote-author">Bruce Lee</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"We are what we repeatedly do. Excellence, then, is not an act, but a habit."</p>
+        <cite class="quote-author">Aristotle</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"For a man to conquer himself is the first and noblest of all victories."</p>
+        <cite class="quote-author">Plato</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"The secret of change is to focus all of your energy, not on fighting the old, but on building the new."</p>
+        <cite class="quote-author">Socrates</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Anyone who has ever made anything of importance was disciplined."</p>
+        <cite class="quote-author">Andrew Hendrixson</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Observe your hearts all times but especially under temptation. Temptation is a fire that brings up the scum of the vile heart: Do you carefully mark the first risings of corruption."</p>
+        <cite class="quote-author">William Shakespeare</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"There is nothing noble in being superior to your fellow man; true nobility is being superior to your former self."</p>
+        <cite class="quote-author">Ernest Hemingway</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Our greatest glory is not in never falling, but in rising every time we fall."</p>
+        <cite class="quote-author">Confucius</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"If not you, then who? If not now, then when?"</p>
+        <cite class="quote-author">Hillel the Elder</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"I know of no more encouraging fact than the unquestioned ability of a man to elevate his life by conscious endeavor."</p>
+        <cite class="quote-author">Henry David Thoreau</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Desire is a contract you make with yourself to be unhappy until you get what you want."</p>
+        <cite class="quote-author">Naval Ravikant</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Peace is happiness at rest, and happiness is peace in motion."</p>
+        <cite class="quote-author">Naval Ravikant</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"The three big ones in life are wealth, health, and happiness. We pursue them in that order, but their importance is reverse."</p>
+        <cite class="quote-author">Naval Ravikant</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Happiness is what's there when you remove the sense that something is missing in your life."</p>
+        <cite class="quote-author">Naval Ravikant</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"A fit body, a calm mind, a house full of love. These things cannot be bought — they must be earned."</p>
+        <cite class="quote-author">Naval Ravikant</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"Keep your identity small."</p>
+        <cite class="quote-author">Paul Graham</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"It's hard to do a really good job on anything you don't think about in the shower."</p>
+        <cite class="quote-author">Paul Graham</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"The way to get startup ideas is not to try to think of startup ideas. It's to look for problems, preferably problems you have yourself."</p>
+        <cite class="quote-author">Paul Graham</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"The more of a noob you are locally, the less of a noob you are globally."</p>
+        <cite class="quote-author">Paul Graham</cite>
+      </blockquote>
+
+      <blockquote class="quote-item">
+        <p class="quote-text">"If you say nothing, you will be criticized. If you say too much, you will be criticized. If you say just the right amount, you will still be criticized. There is no one in this world who escapes blame."</p>
+        <cite class="quote-author">Buddha Bro</cite>
+      </blockquote>
+
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 Bon Sitaula</span>
+        <div class="footer-links">
+          <a href="https://github.com/CuriousCilantro" target="_blank" rel="noopener">GitHub</a>
+          <a href="../index.html">Home</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('toggleIcon');
+    const label = document.getElementById('toggleLabel');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if (saved) applyTheme(saved);
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('theme', next);
+    });
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading… — Bon Sitaula</title>
+  <link rel="stylesheet" href="shared.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@14/marked.min.js"></script>
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <span class="nav-logo">cd ~<span class="cursor"></span></span>
+      <div class="nav-links">
+        <a href="../index.html" class="back-link hide-mobile">← Back</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="toggle-icon" id="toggleIcon">☀️</span>
+          <span class="toggle-label" id="toggleLabel">Light</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header class="post-header" id="post-header">
+      <div style="color:var(--text-muted);font-size:14px;padding:60px 0 40px">Loading…</div>
+    </header>
+    <article class="post-body" id="post-content"></article>
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-copy">© 2026 Bon Sitaula</span>
+        <div class="footer-links">
+          <a href="https://github.com/CuriousCilantro" target="_blank" rel="noopener">GitHub</a>
+          <a href="../index.html">Home</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ── Theme ──────────────────────────────────────────────
+    const toggle = document.getElementById('themeToggle');
+    const icon   = document.getElementById('toggleIcon');
+    const label  = document.getElementById('toggleLabel');
+    const html   = document.documentElement;
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      icon.textContent  = theme === 'dark' ? '☀️' : '🌙';
+      label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    }
+    const saved = localStorage.getItem('theme');
+    if (saved) applyTheme(saved);
+    toggle.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('theme', next);
+    });
+
+    // ── Post loader ────────────────────────────────────────
+    async function loadPost() {
+      const slug = new URLSearchParams(location.search).get('slug');
+
+      if (!slug) return showError('No post specified.');
+
+      try {
+        const [manifestRes, mdRes] = await Promise.all([
+          fetch('manifest.json'),
+          fetch(`posts/${slug}.md`)
+        ]);
+
+        if (!manifestRes.ok) return showError('Could not load post index.');
+        if (!mdRes.ok)       return showError('Post not found.');
+
+        const manifest = await manifestRes.json();
+        const post     = manifest.find(p => p.slug === slug);
+        if (!post) return showError('Post not found in index.');
+
+        const md = await mdRes.text();
+
+        document.title = `${post.title} — Bon Sitaula`;
+
+        document.getElementById('post-header').innerHTML = `
+          <div class="post-tags">
+            ${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+          <h1>${post.title}</h1>
+          <div class="post-meta-line">
+            <span>${post.date}</span>
+            <span class="meta-sep">·</span>
+            <span>${post.readTime} read</span>
+          </div>
+        `;
+
+        document.getElementById('post-content').innerHTML = marked.parse(md);
+
+      } catch (e) {
+        showError('Failed to load post. If running locally, use a local server:<br><code>python -m http.server</code>');
+      }
+    }
+
+    function showError(msg) {
+      document.getElementById('post-header').innerHTML = `
+        <div style="padding:60px 0 12px">
+          <p style="font-size:13px;color:var(--accent);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px">Error</p>
+          <p style="color:var(--text-muted);font-size:15px">${msg}</p>
+          <a href="../index.html" style="display:inline-block;margin-top:20px;font-size:13px;color:var(--accent)">← Go home</a>
+        </div>`;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>
