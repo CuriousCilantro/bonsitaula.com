@@ -3,4 +3,4 @@
 - or humans will start burning each other's village down for their past hangovers
 - humanity always advances however imperfectly toward a better world
 - i should get back to cook my "delicious food" to serve others
-- my mom is getting old
+- my parents are getting old
